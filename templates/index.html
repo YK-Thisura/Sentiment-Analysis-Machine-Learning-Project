@@ -1,53 +1,54 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <Link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}"></Link>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>App</title>
-</head>
-<body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <title>Sentiment Analysis</title>
+  </head>
+  <body>
     <div class="split left">
-        <div class="centered">
-            <img src="../static/products/Product.png" alt="">
-        </div>
+      <div class="centered">
+        <img src="../static/products/Product.png" alt="Product Image" />
+      </div>
     </div>
-
-
     <div class="split right">
-        <div class="container mt-5 mb-5">
-            <div class="d-flex justify-content-center row">
-                <div class="d-flex flex-column col-md-8">
-                    <div>
-                        <label for="">Positive Sentiments : {{ data.positive }}</label>
-                    </div>
-                    <div>
-                        <label for="">Negative Sentiments : {{ data.negative }}</label>
-                    </div>
-                    <div>
-                        <form method="post">
-                          <textarea name="text"></textarea>
-                          <input type="submit">
-                        </form>
-                    </div>
-
-                    <div class="coment-bottom bg-white p-2 px-4">
-                        {% for review in data.reviews %}
-                        <hr/>
-                          <div
-                              class="commented-section mt-2">
-                              <div class="d-flex flex-row align-items-center commented-user">
-                                  </div>
-                                  <div class="text-nowrap bd-highlight"><span>{{ review }}</span></div>
-                                  <hr/>
-                        {% endfor %}
-                      </div>
-                </div>
-            </div>
+      <div class="container mt-5 mb-5">
+        <h1 class="text-center mb-4 page-title">Sentiment Analysis</h1>
+        <div class="sentiment-labels">
+          <p class="positive">
+            <strong>Positive Sentiments:</strong> {{ data.positive }}
+          </p>
+          <p class="negative">
+            <strong>Negative Sentiments:</strong> {{ data.negative }}
+          </p>
         </div>
+        <form method="post" class="mb-4">
+          <textarea name="text" placeholder="Share your thoughts..."></textarea>
+          <button type="submit" class="btn btn-gradient">
+            Submit Feedback
+          </button>
+        </form>
+        <div class="comments-section bg-light p-4 rounded">
+          <h5>User Reviews:</h5>
+          {% for review in data.reviews %}
+          <div class="comment mt-3">
+            <p>{{ review }}</p>
+            <hr />
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
-
-</body>
+  </body>
 </html>
